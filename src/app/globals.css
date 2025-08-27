@@ -1,0 +1,193 @@
+@font-face {
+  font-family: 'VCR OSD Mono';
+  src: url('/VCR_OSD_MONO_1.001.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Terminal Design System */
+@import '../styles/terminal-design-system.css';
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  :root {
+    /* Tactical Intelligence color palette - brand colors */
+    --primary: 21 100% 41%; /* #D35400 - Muted Orange */
+    --secondary: 20 100% 50%; /* #FF5C00 - Bright Orange */
+    --accent: 100 11% 28%; /* #4A5240 - Terminal Green */
+    --tertiary: 17 32% 47%; /* #9D6B53 - Metal Brown */
+    
+    /* Theme-specific colors */
+    --light-background: 60 8% 95%; /* #F2F2F0 */
+    --light-surface: 0 0% 100%; /* #FFFFFF */
+    --light-border: 60 4% 89%; /* #E4E4E2 */
+    --light-text: 210 21% 10%; /* #131A1F */
+    
+    --dark-background: 210 21% 10%; /* #131A1F */
+    --dark-surface: 210 20% 13%; /* #1A222A */
+    --dark-border: 215 17% 18%; /* #252E38 */
+    --dark-text: 60 8% 95%; /* #F2F2F0 */
+    
+    /* Status colors */
+    --success: 142 70% 45%; /* #22C55E */
+    --warning: 38 92% 50%; /* #F59E0B */
+    --error: 0 84% 60%; /* #EF4444 */
+    --info: 217 91% 60%; /* #3B82F6 */
+    
+    /* System variables mapped to light theme by default */
+    --background: var(--light-background);
+    --foreground: var(--light-text);
+    --card: var(--light-surface);
+    --card-foreground: var(--light-text);
+    --popover: var(--light-surface);
+    --popover-foreground: var(--light-text);
+    --primary-foreground: var(--light-surface);
+    --secondary-foreground: var(--light-surface);
+    --muted: var(--light-background);
+    --muted-foreground: hsl(215 16% 47%);
+    --accent-foreground: var(--light-surface);
+    --destructive: var(--error);
+    --destructive-foreground: var(--light-surface);
+    --border: var(--light-border);
+    --input: var(--light-border);
+    --ring: var(--primary);
+    
+    /* Chart colors */
+    --chart-1: var(--primary);
+    --chart-2: var(--secondary);
+    --chart-3: var(--accent);
+    --chart-4: var(--tertiary);
+    --chart-5: var(--dark-background);
+    
+    --radius: 0.5rem;
+    
+    /* Sidebar specific variables */
+    --sidebar-background: var(--dark-background);
+    --sidebar-foreground: var(--dark-text);
+    --sidebar-primary: var(--primary);
+    --sidebar-primary-foreground: var(--light-surface);
+    --sidebar-accent: var(--accent);
+    --sidebar-accent-foreground: var(--light-surface);
+    --sidebar-border: var(--dark-border);
+    --sidebar-ring: var(--primary);
+    --white: hsl(0 0% 100%);
+  }
+
+  .dark {
+    /* System variables mapped to dark theme */
+    --background: var(--dark-background);
+    --foreground: var(--dark-text);
+    --card: var(--dark-surface);
+    --card-foreground: var(--dark-text);
+    --popover: var(--dark-surface);
+    --popover-foreground: var(--dark-text);
+    --primary-foreground: var(--dark-text);
+    --secondary-foreground: var(--dark-text);
+    --muted: hsl(210 20% 16%);
+    --muted-foreground: hsl(215 16% 65%);
+    --accent-foreground: var(--dark-text);
+    --destructive: var(--error);
+    --destructive-foreground: var(--dark-text);
+    --border: var(--dark-border);
+    --input: var(--dark-border);
+    --ring: var(--primary);
+    
+    /* Chart colors - adjust for dark theme */
+    --chart-1: var(--primary);
+    --chart-2: var(--secondary);
+    --chart-3: var(--accent);
+    --chart-4: var(--tertiary);
+    --chart-5: var(--dark-text);
+    
+    /* Sidebar specific variables */
+    --sidebar-background: hsl(210 21% 8%);
+    --sidebar-foreground: var(--dark-text);
+    --sidebar-primary: var(--primary);
+    --sidebar-primary-foreground: var(--dark-text);
+    --sidebar-accent: var(--accent);
+    --sidebar-accent-foreground: var(--dark-text);
+    --sidebar-border: var(--dark-border);
+    --sidebar-ring: var(--primary);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .font-vcr {
+    font-family: 'VCR OSD Mono', monospace;
+  }
+  
+  /* Mad Libs animations */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+  
+  /* Terminal cursor animation */
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+  
+  .animate-pulse {
+    animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Text gradient effect */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+  
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-fade-in {
+      animation: none;
+      opacity: 1;
+    }
+  }
+}

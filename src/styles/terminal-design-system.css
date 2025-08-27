@@ -1,0 +1,386 @@
+/* src/styles/terminal-design-system.css */
+
+/* ===================================
+   TERMINAL DESIGN SYSTEM
+   90's Sharp Corners + Hacker Vibes
+   =================================== */
+
+:root {
+  /* Terminal Color Palette */
+  --terminal-green: 142 70% 45%; /* #22C55E */
+  --terminal-amber: 38 92% 50%; /* #F59E0B */
+  --terminal-red: 0 84% 60%; /* #EF4444 */
+  --terminal-cyan: 186 92% 45%; /* #0DCAF0 */
+  --terminal-phosphor: 120 100% 50%; /* #00FF00 - classic terminal green */
+  
+  /* CRT Monitor Effects */
+  --crt-flicker: rgba(18, 16, 16, 0.1);
+  --scanline: rgba(0, 0, 0, 0.3);
+  
+  /* Sharp Corner Radius - NO CURVES */
+  --radius: 0rem;
+  --radius-sm: 0rem;
+  --radius-md: 0rem;
+  --radius-lg: 0rem;
+}
+
+/* ===================================
+   GLOBAL OVERRIDES
+   =================================== */
+
+/* Terminal Grid Background */
+.terminal-grid {
+  background-image: 
+    linear-gradient(rgba(34, 197, 94, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 197, 94, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: -1px -1px;
+}
+
+/* Scanline Effect */
+.terminal-scanlines::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    var(--scanline) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  opacity: 0.1;
+}
+
+/* CRT Monitor Glow */
+.terminal-glow {
+  box-shadow: 
+    0 0 20px rgba(34, 197, 94, 0.5),
+    inset 0 0 20px rgba(34, 197, 94, 0.1);
+}
+
+/* ===================================
+   TYPOGRAPHY
+   =================================== */
+
+.terminal-text {
+  font-family: 'VCR OSD Mono', 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Glitch Text Effect */
+@keyframes glitch {
+  0%, 100% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff, 0.025em 0.05em 0 #fffc00; }
+  15% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff, 0.025em 0.05em 0 #fffc00; }
+  16% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+  49% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+  50% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff, 0 -0.05em 0 #fffc00; }
+  99% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff, 0 -0.05em 0 #fffc00; }
+}
+
+.glitch-text {
+  animation: glitch 2s infinite;
+}
+
+/* ===================================
+   COMPONENTS
+   =================================== */
+
+/* Terminal Window */
+.terminal-window {
+  background: hsl(var(--card));
+  border: 1px solid #000000;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 !important;
+}
+
+.terminal-header {
+  background: hsl(var(--terminal-green));
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid hsl(var(--terminal-green));
+}
+
+.terminal-traffic-lights {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal-light {
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0 !important;
+}
+
+.terminal-light-red { background: #ff5f57; }
+.terminal-light-yellow { background: #ffbd2e; }
+.terminal-light-green { background: #28ca42; }
+
+/* Sharp Buttons */
+.btn-terminal {
+  background: transparent;
+  border: 1px solid #000000;
+  color: hsl(var(--foreground));
+  padding: 0.75rem 1.5rem;
+  font-family: 'VCR OSD Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-radius: 0 !important;
+}
+
+.btn-terminal:hover {
+  background: #000000;
+  color: hsl(var(--background));
+}
+
+/* Terminal buttons inside containers (subtle black border) */
+.btn-terminal-nested {
+  background: transparent;
+  border: 1px solid #000000;
+  color: hsl(var(--foreground));
+  padding: 0.75rem 1.5rem;
+  font-family: 'VCR OSD Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-radius: 0 !important;
+}
+
+.btn-terminal-nested:hover {
+  background: #000000;
+  color: hsl(var(--background));
+}
+
+/* Sharp Cards */
+.card-terminal {
+  background: hsl(var(--card));
+  border: 1px solid #000000 !important;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Card terminal without right border (for sidebar components) */
+.card-terminal-no-right {
+  background: hsl(var(--card));
+  border-top: 1px solid #000000 !important;
+  border-bottom: 1px solid #000000 !important;
+  border-left: 1px solid #000000 !important;
+  border-right: none !important;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Input Fields */
+.input-terminal {
+  background: hsl(var(--input));
+  border: 1px solid #000000;
+  color: hsl(var(--foreground));
+  font-family: 'VCR OSD Mono', monospace;
+  padding: 0.75rem;
+  position: relative;
+  border-radius: 0 !important;
+}
+
+.input-terminal:focus {
+  outline: none;
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+}
+
+/* Status Indicators */
+.status-led {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 0.5rem;
+  position: relative;
+  border-radius: 0 !important;
+}
+
+.status-led::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 1px solid currentColor;
+  opacity: 0.5;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 0; }
+}
+
+.status-led.online { background: hsl(var(--terminal-green)); color: hsl(var(--terminal-green)); }
+.status-led.offline { background: hsl(var(--terminal-red)); color: hsl(var(--terminal-red)); }
+.status-led.warning { background: hsl(var(--terminal-amber)); color: hsl(var(--terminal-amber)); }
+
+/* Deployment-specific styles */
+.deployment-status-badge {
+  font-family: 'VCR OSD Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.deployment-log-entry {
+  font-family: 'VCR OSD Mono', monospace;
+  font-size: 0.875rem;
+}
+
+.deployment-log-entry:hover {
+  background-color: rgba(34, 197, 94, 0.05);
+}
+
+/* Data Tables */
+.table-terminal {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'VCR OSD Mono', monospace;
+}
+
+.table-terminal th,
+.table-terminal td {
+  border: 1px solid #000000;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.table-terminal th {
+  background: hsl(var(--muted));
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
+.table-terminal tr:hover {
+  background: hsl(var(--muted) / 0.5);
+}
+
+/* Terminal Cursor */
+.terminal-cursor {
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  background: hsl(var(--terminal-green));
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Sidebar Navigation */
+.nav-terminal {
+  background: rgba(0, 0, 0, 0.9);
+  border-right: 1px solid #000000;
+}
+
+.nav-item-terminal {
+  padding: 1rem;
+  border-bottom: 1px solid #000000;
+  font-family: 'VCR OSD Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.nav-item-terminal::before {
+  content: '>';
+  position: absolute;
+  left: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.nav-item-terminal:hover::before,
+.nav-item-terminal.active::before {
+  opacity: 1;
+}
+
+.nav-item-terminal:hover,
+.nav-item-terminal.active {
+  background: hsl(var(--primary) / 0.1);
+  padding-left: 2rem;
+  color: hsl(var(--primary));
+}
+
+/* ASCII Borders */
+.ascii-border {
+  border: none;
+  position: relative;
+  padding: 1rem;
+}
+
+.ascii-border::before {
+  content: '+-----------------------------------+';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-family: 'VCR OSD Mono', monospace;
+  color: hsl(var(--terminal-green));
+  font-size: 0.75rem;
+}
+
+.ascii-border::after {
+  content: '+-----------------------------------+';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-family: 'VCR OSD Mono', monospace;
+  color: hsl(var(--terminal-green));
+  font-size: 0.75rem;
+}
+
+/* Loading Animation */
+.terminal-loader {
+  font-family: 'VCR OSD Mono', monospace;
+  color: hsl(var(--terminal-green));
+}
+
+.terminal-loader::after {
+  content: '...';
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { content: '.'; }
+  33% { content: '..'; }
+  66% { content: '...'; }
+}
+
+/* Matrix Rain Effect (for backgrounds) */
+.matrix-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.05;
+  z-index: 1;
+}
